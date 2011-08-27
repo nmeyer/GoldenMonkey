@@ -28,7 +28,7 @@ create_player = () ->
 
 add_player = (player) ->
     players[player.id] = player
-    
+
 rem_player = (pid) ->
     delete players[pid]
 
@@ -39,7 +39,7 @@ tick = () ->
     for pid, p in players
         player.move(p, direction[pid])
     get_state()
-    
+
 collisions = () ->
     ""
 
@@ -49,10 +49,10 @@ init = () ->
 set_direction = (player, direction) ->
     directions[player.id] = direction
 
-exports.init = init
-exports.SPEED = SPEED
-exports.tick = tick
 exports.create_player = create_player
 exports.add_player = add_player
 exports.rem_player = rem_player
 exports.get_state = get_state
+exports.SPEED = SPEED
+exports.init = init
+exports.tick = tick

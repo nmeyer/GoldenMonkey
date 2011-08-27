@@ -68,11 +68,11 @@
   set_direction = function(player, direction) {
     return directions[player.id] = direction;
   };
-  exports.init = init;
-  exports.SPEED = SPEED;
-  exports.tick = tick;
   exports.create_player = create_player;
   exports.add_player = add_player;
   exports.rem_player = rem_player;
   exports.get_state = get_state;
+  exports.SPEED = SPEED;
+  exports.init = init;
+  exports.tick = tick;
 }).call(this);
