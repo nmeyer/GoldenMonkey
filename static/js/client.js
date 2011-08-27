@@ -3,8 +3,8 @@
   socket = null;
   $(function() {
     var box, height, row, width, x, y;
-    width = 20;
-    height = 10;
+    width = 30;
+    height = 30;
     for (y = 1; 1 <= height ? y <= height : y >= height; 1 <= height ? y++ : y--) {
       row = $("#row-template").clone();
       for (x = 1; 1 <= width ? x <= width : x >= width; 1 <= width ? x++ : x--) {

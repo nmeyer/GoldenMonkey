@@ -1,10 +1,10 @@
 (function() {
-  var FPS, SPEED, add_player, check_collisions, create_player, defaults, directions, get_state, init, move_snakes, next_id, pid, player, players, rem_player, set_direction, tick, _;
+  var FPS, SPEED, add_player, check_collisions, create_player, defaults, directions, get_state, init, md, move_snakes, next_id, pid, player, players, rem_player, set_direction, tick, _;
   _ = require("underscore");
   player = require('./player');
   players = {};
   directions = {};
-  FPS = .5;
+  FPS = 20;
   SPEED = 1000 / FPS;
   defaults = {
     snakes: {
@@ -23,6 +23,7 @@
     x = Math.floor(Math.random() * defaults.board.size);
     y = Math.floor(Math.random() * defaults.board.size);
     return p = {
+      alive: true,
       coords: (function() {
         var _ref, _results;
         _results = [];
@@ -57,34 +58,22 @@
     return get_state();
   };
   move_snakes = function() {
-    var p, _i, _len, _ref, _results;
+    var isDead, p, _i, _len, _ref, _results;
     _ref = _.values(players);
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       p = _ref[_i];
-      _results.push(directions[p.id] ? player.move(p, directions[p.id]) : void 0);
+      if (p.alive) {
+        _results.push(directions[p.id] ? isDead = player.move(p, directions[p.id]) : void 0);
+      }
     }
     return _results;
   };
   check_collisions = function() {
-    var p1, p2, snakes, _i, _len, _results;
-    snakes = _.values(players);
-    _results = [];
-    for (_i = 0, _len = snakes.length; _i < _len; _i++) {
-      p1 = snakes[_i];
-      _results.push((function() {
-        var _j, _len2, _results2;
-        _results2 = [];
-        for (_j = 0, _len2 = snakes.length; _j < _len2; _j++) {
-          p2 = snakes[_j];
-          if (p1 === p2) {
-            continue;
-          }
-        }
-        return _results2;
-      })());
-    }
-    return _results;
+    return "";
+  };
+  md = function(c1, c2) {
+    return Math.abs(c1[0], c2[0]) + Math.abs(c1[1], c2[1]);
   };
   init = function() {
     return "";

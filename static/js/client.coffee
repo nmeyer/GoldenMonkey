@@ -1,8 +1,8 @@
 socket = null
 
 $ ->
-    width = 20
-    height = 10
+    width = 30
+    height = 30
 
     for y in [1..height]
         row = $("#row-template").clone()

@@ -1,5 +1,5 @@
 (function() {
-  var assert, directions, move, vectors;
+  var assert, directions, kill, move, vectors;
   assert = require("assert").ok;
   vectors = {
     up: [0, -1],
@@ -13,13 +13,25 @@
     left: 3,
     right: 4
   };
+  this.kill = kill = function(player) {
+    player.alive = false;
+    return player.coords = [];
+  };
   this.move = move = function(player, direction) {
-    var c, v;
+    var c, coord, head, v, _i, _len, _ref, _results;
     v = vectors[direction];
     assert(v, "no valid direction vector");
     c = player.coords[0];
     assert(c, "no valid coords");
-    player.coords.unshift([v[0] + c[0], v[1] + c[1]]);
-    return player.coords.pop();
+    head = [v[0] + c[0], v[1] + c[1]];
+    player.coords.unshift(head);
+    player.coords.pop();
+    _ref = player.coords.slice(1, (player.coords.length + 1) || 9e9);
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      coord = _ref[_i];
+      _results.push(head[0] === coord[0] && head[1] === coord[1] ? (console.log("killed!"), kill(player)) : void 0);
+    }
+    return _results;
   };
 }).call(this);

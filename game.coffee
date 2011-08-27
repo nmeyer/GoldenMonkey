@@ -5,7 +5,7 @@ player = require('./player')
 players = {}
 directions = {}
 
-FPS = .5
+FPS = 20
 SPEED = 1000 / FPS
 
 defaults = 
@@ -22,6 +22,7 @@ create_player = () ->
     x = Math.floor Math.random() * defaults.board.size
     y = Math.floor Math.random() * defaults.board.size
     p = 
+        alive: true
         coords: ([x, ny] for ny in [0..defaults.snakes.len])
         loc: [x, y]
         id: next_id()
@@ -41,15 +42,15 @@ tick = () ->
     get_state()
 
 move_snakes = () ->
-    for p in _.values(players)
+    for p in _.values(players) when p.alive
         if directions[p.id]
-            player.move(p, directions[p.id])
+            isDead = player.move(p, directions[p.id])
 
 check_collisions = () ->
-    snakes = _.values(players)
-    for p1 in snakes
-        for p2 in snakes
-            continue if p1 == p2
+    ""
+            
+md = (c1, c2) ->
+    return Math.abs(c1[0], c2[0]) + Math.abs(c1[1], c2[1])
 
 init = () ->
     ""
