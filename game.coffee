@@ -36,8 +36,10 @@ get_state = () ->
     (x.coords for x in _.values players)
 
 tick = () ->
-    for pid, p in players
-        player.move(p, direction[pid])
+    for p in _.values(players)
+        # console.log pid, p, directions[pid]
+        if directions[p.id]
+            player.move(p, directions[p.id])
     get_state()
 
 collisions = () ->

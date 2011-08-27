@@ -52,10 +52,13 @@
     return _results;
   };
   tick = function() {
-    var p, pid, _len;
-    for (p = 0, _len = players.length; p < _len; p++) {
-      pid = players[p];
-      player.move(p, direction[pid]);
+    var p, _i, _len, _ref;
+    _ref = _.values(players);
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      p = _ref[_i];
+      if (directions[p.id]) {
+        player.move(p, directions[p.id]);
+      }
     }
     return get_state();
   };
