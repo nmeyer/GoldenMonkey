@@ -46,7 +46,7 @@ collisions = () ->
 init = () ->
     ""
 
-set_direction = (player, direction) ->
+@set_direction = set_direction = (player, direction) ->
     directions[player.id] = direction
 
 exports.init = init

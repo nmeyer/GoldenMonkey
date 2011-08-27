@@ -1,7 +1,12 @@
+.main-column {
+  width: 500px;
+  margin: 0 auto; }
+
 .snake-box {
   width: 20px;
   height: 20px;
-  border: 1px solid black;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
   background-color: #eee;
   float: left; }
 

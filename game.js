@@ -65,7 +65,7 @@
   init = function() {
     return "";
   };
-  set_direction = function(player, direction) {
+  this.set_direction = set_direction = function(player, direction) {
     return directions[player.id] = direction;
   };
   exports.init = init;
