@@ -21,6 +21,11 @@ directions =
 #    location: [x1, y1]
 #    id: some number
 #
+
+@kill = kill = (player) ->
+    player.alive = false
+    player.coords = []
+
 @move = move = (player, direction) ->
     # update the player's coords in place, moving it 1 unit in direction
     v = vectors[direction]
@@ -28,6 +33,19 @@ directions =
     c = player.coords[0]
     assert c, "no valid coords"
     
-    player.coords.unshift([v[0] + c[0], v[1] + c[1]])
+    head = [v[0] + c[0], v[1] + c[1]]
+    player.coords.unshift(head)
     player.coords.pop()
+    
+    # check new head against all other @coords
+    for coord in player.coords[1..player.coords.length]
+        if head[0] == coord[0] and head[1] == coord[1]
+            console.log "killed!"
+            kill(player)
+    
+    # check head against all other players coords for collision
+    # head = p.coords[0]
+    # for coord in (p2.coords for p2 in _.values(players) when p2 != p)
+    #     for coord in coords
+    #         if head == coord
 

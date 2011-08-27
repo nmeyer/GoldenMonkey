@@ -1,6 +1,23 @@
 socket = null
 
 $ ->
+    width = 30
+    height = 30
+
+    for y in [1..height]
+        row = $("#row-template").clone()
+        for x in [1..width]
+            box = $("#snake-box-template").clone()
+            box.attr('x',x)
+            box.attr('y',y)
+            box.removeAttr('id')
+            box.show()
+            box.appendTo(row)
+
+        row.removeAttr('id')
+        row.show()
+        $(".game-board").append(row)
+
     # Start socket.io
     socket = io.connect()
 
