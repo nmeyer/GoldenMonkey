@@ -18,19 +18,13 @@ $ ->
         row.show()
         $(".game-board").append(row)
 
-    #sampleCoords = [[3,3],[4,3],[5,3]]
-    #sampleCoords2 = [[3,2],[3,3],[4,3]]
-    #onGameState(sampleCoords)
-    #setTimeout (-> onGameState(sampleCoords2)),1000
-
     # Start socket.io
     socket = io.connect()
 
-    socket.on "gamestate", (data) ->
-        console.log data
+    socket.on "gamestate", (snakes) ->
+        console.log snakes
 
-        [coords] = data
-        onGameState(coords)
+        onGameState(snakes)
 
 
     $(document).keydown (event) ->
@@ -51,14 +45,17 @@ tellServerDirection = (direction) ->
 boxAt = (x,y) ->
     return $("[x=#{x}][y=#{y}]")
 
-onGameState = (coords) ->
+onGameState = (snakes) ->
     # Clear all boxes
     $(".snake-box").removeClass('enemy').removeClass('you')
 
+    # Render all the snakes
+    _.each snakes, (snake) ->
+        renderSnake(snake)
+
+renderSnake = (coords) ->
     # Use grid coordinates to highlight boxes
     _.each coords, (coord) ->
         [x,y] = coord
         box = boxAt(x,y)
         box.addClass('enemy')
-
-
