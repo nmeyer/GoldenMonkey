@@ -1,4 +1,6 @@
 
+assert = require("assert").ok
+
 vectors =
     up: [0, -1],
     down: [0, 1]
@@ -19,9 +21,12 @@ directions =
 #    location: [x1, y1]
 #    id: some number
 #
-move = (player, direction) ->
+@move = move = (player, direction) ->
     # update the player's coords in place, moving it 1 unit in direction
     v = vectors[direction]
+    assert v, "no valid direction vector"
     c = player.coords[0]
+    assert c, "no valid coords"
     player.coords.unshift([v[0] + c[0], v[1] + c[1]])
     player.coords.pop()
+
