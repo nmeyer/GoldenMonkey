@@ -1,5 +1,5 @@
 (function() {
-  var FPS, SPEED, add_player, collisions, create_player, defaults, directions, get_state, init, next_id, pid, player, players, rem_player, set_direction, tick, _;
+  var FPS, SPEED, add_player, check_collisions, create_player, defaults, directions, get_state, init, move_snakes, next_id, pid, player, players, rem_player, set_direction, tick, _;
   _ = require("underscore");
   player = require('./player');
   players = {};
@@ -52,18 +52,39 @@
     return _results;
   };
   tick = function() {
-    var p, _i, _len, _ref;
-    _ref = _.values(players);
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      p = _ref[_i];
-      if (directions[p.id]) {
-        player.move(p, directions[p.id]);
-      }
-    }
+    move_snakes();
+    check_collisions;
     return get_state();
   };
-  collisions = function() {
-    return "";
+  move_snakes = function() {
+    var p, _i, _len, _ref, _results;
+    _ref = _.values(players);
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      p = _ref[_i];
+      _results.push(directions[p.id] ? player.move(p, directions[p.id]) : void 0);
+    }
+    return _results;
+  };
+  check_collisions = function() {
+    var p1, p2, snakes, _i, _len, _results;
+    snakes = _.values(players);
+    _results = [];
+    for (_i = 0, _len = snakes.length; _i < _len; _i++) {
+      p1 = snakes[_i];
+      _results.push((function() {
+        var _j, _len2, _results2;
+        _results2 = [];
+        for (_j = 0, _len2 = snakes.length; _j < _len2; _j++) {
+          p2 = snakes[_j];
+          if (p1 === p2) {
+            continue;
+          }
+        }
+        return _results2;
+      })());
+    }
+    return _results;
   };
   init = function() {
     return "";
