@@ -1,7 +1,8 @@
 (function() {
-  var boxAt, onGameState;
+  var boxAt, onGameState, socket, tellServerDirection;
+  socket = null;
   $(function() {
-    var box, height, row, sampleCoords, sampleCoords2, socket, width, x, y;
+    var box, height, row, width, x, y;
     width = 20;
     height = 10;
     for (y = 1; 1 <= height ? y <= height : y >= height; 1 <= height ? y++ : y--) {
@@ -18,17 +19,30 @@
       row.show();
       $(".game-board").append(row);
     }
-    sampleCoords = [[3, 3], [4, 3], [5, 3]];
-    sampleCoords2 = [[3, 2], [3, 3], [4, 3]];
-    onGameState(sampleCoords);
-    setTimeout((function() {
-      return onGameState(sampleCoords2);
-    }), 1000);
     socket = io.connect();
-    return socket.on("gamestate", function(data) {
-      return console.log(data);
+    socket.on("gamestate", function(data) {
+      var coords;
+      console.log(data);
+      coords = data[0];
+      return onGameState(coords);
+    });
+    return $(document).keydown(function(event) {
+      console.log('keypress');
+      console.log(event.which);
+      if (event.which === 38) {
+        return tellServerDirection('up');
+      } else if (event.which === 39) {
+        return tellServerDirection('right');
+      } else if (event.which === 40) {
+        return tellServerDirection('down');
+      } else if (event.which === 37) {
+        return tellServerDirection('left');
+      }
     });
   });
+  tellServerDirection = function(direction) {
+    return socket.emit('update', direction);
+  };
   boxAt = function(x, y) {
     return $("[x=" + x + "][y=" + y + "]");
   };

@@ -1,3 +1,5 @@
+socket = null
+
 $ ->
     width = 20
     height = 10
@@ -16,10 +18,10 @@ $ ->
         row.show()
         $(".game-board").append(row)
 
-    sampleCoords = [[3,3],[4,3],[5,3]]
-    sampleCoords2 = [[3,2],[3,3],[4,3]]
-    onGameState(sampleCoords)
-    setTimeout (-> onGameState(sampleCoords2)),1000
+    #sampleCoords = [[3,3],[4,3],[5,3]]
+    #sampleCoords2 = [[3,2],[3,3],[4,3]]
+    #onGameState(sampleCoords)
+    #setTimeout (-> onGameState(sampleCoords2)),1000
 
     # Start socket.io
     socket = io.connect()
@@ -27,6 +29,24 @@ $ ->
     socket.on "gamestate", (data) ->
         console.log data
 
+        [coords] = data
+        onGameState(coords)
+
+
+    $(document).keydown (event) ->
+        console.log 'keypress'
+        console.log event.which
+        if event.which == 38
+            tellServerDirection('up')
+        else if event.which == 39
+            tellServerDirection('right')
+        else if event.which == 40
+            tellServerDirection('down')
+        else if event.which == 37
+            tellServerDirection('left')
+
+tellServerDirection = (direction) ->
+    socket.emit 'update', direction
 
 boxAt = (x,y) ->
     return $("[x=#{x}][y=#{y}]")
