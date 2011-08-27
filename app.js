@@ -25,7 +25,7 @@
     socket.emit("gamestate", game.get_state());
     socket.on("update", function(data) {
       console.log(data);
-      return game.set_direction(player, 'n');
+      return game.set_direction(player, data);
     });
     return socket.on("disconnect", function() {
       return game.rem_player(player.id);

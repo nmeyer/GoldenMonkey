@@ -1,4 +1,10 @@
 
+vectors =
+    up: [0, -1],
+    down: [0, 1]
+    left: [-1, 0]
+    right: [1, 0]
+
 directions = 
     up: 1
     down: 2
@@ -15,8 +21,7 @@ directions =
 #
 move = (player, direction) ->
     # update the player's coords in place, moving it 1 unit in direction
-    # 
-    # .pop the last member of player.coords & .unshift the new coord onto player.coords
-    
-    ""
-
+    v = vectors[direction]
+    c = player.coords[0]
+    player.coords.unshift([v[0] + c[0], v[1] + c[1]])
+    player.coords.pop()

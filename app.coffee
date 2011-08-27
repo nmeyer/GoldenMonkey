@@ -34,7 +34,7 @@ io.sockets.on "connection", (socket) ->
 
     socket.on "update", (data) ->
         console.log data
-        game.set_direction(player, 'n')
+        game.set_direction(player, data)
 
     socket.on "disconnect", () ->
         game.rem_player player.id
