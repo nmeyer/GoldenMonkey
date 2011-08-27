@@ -36,14 +36,20 @@ get_state = () ->
     (x.coords for x in _.values players)
 
 tick = () ->
-    for p in _.values(players)
-        # console.log pid, p, directions[pid]
-        if directions[p.id]
-            player.move(p, directions[p.id])
+    move_snakes()
+    check_collisions
     get_state()
 
-collisions = () ->
-    ""
+move_snakes = () ->
+    for p in _.values(players)
+        if directions[p.id]
+            player.move(p, directions[p.id])
+
+check_collisions = () ->
+    snakes = _.values(players)
+    for p1 in snakes
+        for p2 in snakes
+            continue if p1 == p2
 
 init = () ->
     ""

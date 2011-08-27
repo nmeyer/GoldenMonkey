@@ -27,6 +27,7 @@ directions =
     assert v, "no valid direction vector"
     c = player.coords[0]
     assert c, "no valid coords"
+    
     player.coords.unshift([v[0] + c[0], v[1] + c[1]])
     player.coords.pop()
 
