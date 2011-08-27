@@ -20,3 +20,4 @@ $ ->
 
     socket.on "gamestate", (data) ->
         console.log data
+ 

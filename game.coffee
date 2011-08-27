@@ -12,7 +12,7 @@ defaults =
     snakes:
         len: 8
     board:
-        size: 100
+        size: 10
 
 pid = 0
 next_id = () ->
