@@ -1,9 +1,10 @@
 (function() {
-  var FPS, SPEED, add_player, collisions, create_player, defaults, directions, get_state, init, next_id, pid, players, rem_player, set_direction, tick, _;
+  var FPS, SPEED, add_player, collisions, create_player, defaults, directions, get_state, init, next_id, pid, player, players, rem_player, set_direction, tick, _;
   _ = require("underscore");
+  player = require('./player');
   players = {};
   directions = {};
-  FPS = 1;
+  FPS = .5;
   SPEED = 1000 / FPS;
   defaults = {
     snakes: {
@@ -41,13 +42,20 @@
     return delete players[pid];
   };
   get_state = function() {
-    return _.values(players);
+    var x, _i, _len, _ref, _results;
+    _ref = _.values(players);
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      x = _ref[_i];
+      _results.push(x.coords);
+    }
+    return _results;
   };
   tick = function() {
-    var pid, player, _len;
-    for (player = 0, _len = players.length; player < _len; player++) {
-      pid = players[player];
-      player.tick();
+    var p, pid, _len;
+    for (p = 0, _len = players.length; p < _len; p++) {
+      pid = players[p];
+      player.move(p, direction[pid]);
     }
     return get_state();
   };
@@ -57,10 +65,14 @@
   init = function() {
     return "";
   };
-  set_direction = function(player) {
-    return "";
+  set_direction = function(player, direction) {
+    return directions[player.id] = direction;
   };
   exports.init = init;
   exports.SPEED = SPEED;
   exports.tick = tick;
+  exports.create_player = create_player;
+  exports.add_player = add_player;
+  exports.rem_player = rem_player;
+  exports.get_state = get_state;
 }).call(this);

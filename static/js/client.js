@@ -1,7 +1,7 @@
 (function() {
   var boxAt, onGameState;
   $(function() {
-    var box, height, row, sampleCoords, sampleCoords2, width, x, y;
+    var box, height, row, sampleCoords, sampleCoords2, socket, width, x, y;
     width = 20;
     height = 10;
     for (y = 1; 1 <= height ? y <= height : y >= height; 1 <= height ? y++ : y--) {
@@ -21,9 +21,13 @@
     sampleCoords = [[3, 3], [4, 3], [5, 3]];
     sampleCoords2 = [[3, 2], [3, 3], [4, 3]];
     onGameState(sampleCoords);
-    return setTimeout((function() {
+    setTimeout((function() {
       return onGameState(sampleCoords2);
     }), 1000);
+    socket = io.connect();
+    return socket.on("gamestate", function(data) {
+      return console.log(data);
+    });
   });
   boxAt = function(x, y) {
     return $("[x=" + x + "][y=" + y + "]");

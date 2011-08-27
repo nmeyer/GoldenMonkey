@@ -20,13 +20,12 @@ $ ->
     sampleCoords2 = [[3,2],[3,3],[4,3]]
     onGameState(sampleCoords)
     setTimeout (-> onGameState(sampleCoords2)),1000
-    # Start socket.io
-    #socket = io.connect()
-    #io.sockets.on 'connection', (socket) ->
-    #    console.log 'connected'
 
-    #socket.on 'news', (data) ->
-    #    console.log data
+    # Start socket.io
+    socket = io.connect()
+
+    socket.on "gamestate", (data) ->
+        console.log data
 
 
 

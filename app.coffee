@@ -26,20 +26,23 @@ game.init()
 
 io.sockets.on "connection", (socket) ->
 
+    console.log "connected"
+    
     player = game.create_player()
-    game.add_player player.id
+    game.add_player player
     socket.emit "gamestate", game.get_state()
 
     socket.on "update", (data) ->
         console.log data
+        game.set_direction(player, 'n')
 
     socket.on "disconnect", () ->
         game.rem_player player.id
 
 loopt = () ->
-    console.log "loopt"
-    io.sockets.emit "gamestate", game.tick()
-    ""
+    state = game.tick()
+    console.log "loopt", state
+    io.sockets.emit "gamestate", state
 
 setInterval loopt, game.SPEED
 

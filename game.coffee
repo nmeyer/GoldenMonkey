@@ -1,10 +1,11 @@
 
 _ = require("underscore")
+player = require('./player')
 
 players = {}
 directions = {}
 
-FPS = 1
+FPS = .5
 SPEED = 1000 / FPS
 
 defaults = 
@@ -32,11 +33,11 @@ rem_player = (pid) ->
     delete players[pid]
 
 get_state = () ->
-    _.values players
+    (x.coords for x in _.values players)
 
 tick = () ->
-    for pid, player in players
-        player.tick()
+    for pid, p in players
+        player.move(p, direction[pid])
     get_state()
     
 collisions = () ->
@@ -45,10 +46,13 @@ collisions = () ->
 init = () ->
     ""
 
-set_direction = (player) ->
-    ""
+set_direction = (player, direction) ->
+    directions[player.id] = direction
 
 exports.init = init
 exports.SPEED = SPEED
 exports.tick = tick
-    
+exports.create_player = create_player
+exports.add_player = add_player
+exports.rem_player = rem_player
+exports.get_state = get_state
