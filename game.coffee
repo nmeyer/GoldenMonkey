@@ -30,7 +30,7 @@ add_player = (player) ->
     players[player.id] = player
 
 rem_player = (pid) ->
-    delete players[pid]
+    delete players[player.id]
 
 get_state = () ->
     (x.coords for x in _.values players)

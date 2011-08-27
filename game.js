@@ -39,7 +39,7 @@
     return players[player.id] = player;
   };
   rem_player = function(pid) {
-    return delete players[pid];
+    return delete players[player.id];
   };
   get_state = function() {
     var x, _i, _len, _ref, _results;

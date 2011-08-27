@@ -29,6 +29,7 @@ io.sockets.on "connection", (socket) ->
     console.log "connected"
     
     player = game.create_player()
+    console.log 'created', player.id
     game.add_player player
     socket.emit "gamestate", game.get_state()
 
@@ -37,7 +38,7 @@ io.sockets.on "connection", (socket) ->
         game.set_direction(player, data)
 
     socket.on "disconnect", () ->
-        game.rem_player player.id
+        game.rem_player player
 
 loopt = () ->
     state = game.tick()
