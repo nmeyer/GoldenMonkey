@@ -23,6 +23,7 @@
     player = game.create_player();
     console.log('created', player.id);
     game.add_player(player);
+    socket.emit("board", 100);
     socket.emit("gamestate", game.get_state());
     socket.on("update", function(data) {
       console.log(data);

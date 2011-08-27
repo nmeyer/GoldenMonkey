@@ -51,6 +51,10 @@ check_collisions = () ->
         for p2 in snakes
             continue if p1 == p2
 
+check_self_collisions = () ->
+    #
+    
+
 init = () ->
     ""
 

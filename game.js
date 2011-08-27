@@ -1,5 +1,5 @@
 (function() {
-  var FPS, SPEED, add_player, check_collisions, create_player, defaults, directions, get_state, init, move_snakes, next_id, pid, player, players, rem_player, set_direction, tick, _;
+  var FPS, SPEED, add_player, check_collisions, check_self_collisions, create_player, defaults, directions, get_state, init, move_snakes, next_id, pid, player, players, rem_player, set_direction, tick, _;
   _ = require("underscore");
   player = require('./player');
   players = {};
@@ -86,6 +86,7 @@
     }
     return _results;
   };
+  check_self_collisions = function() {};
   init = function() {
     return "";
   };
