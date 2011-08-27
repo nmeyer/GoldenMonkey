@@ -25,8 +25,13 @@
       return onGameState(sampleCoords2);
     }), 1000);
     socket = io.connect();
-    return socket.on("gamestate", function(data) {
+    socket.on("gamestate", function(data) {
       return console.log(data);
+    });
+    $(document).keypress(console.log);
+    return $(document).keypress(function(e) {
+      console.log(e.charCode());
+      return "";
     });
   });
   boxAt = function(x, y) {

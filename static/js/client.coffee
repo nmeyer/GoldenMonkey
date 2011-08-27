@@ -26,6 +26,11 @@ $ ->
 
     socket.on "gamestate", (data) ->
         console.log data
+        
+    $(document).keypress console.log
+    $(document).keypress (e) ->
+        console.log e.charCode()
+        ""
 
 
 boxAt = (x,y) ->
