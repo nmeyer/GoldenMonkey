@@ -1,6 +1,7 @@
 (function() {
-  var FPS, SPEED, add_player, collisions, create_player, defaults, directions, get_state, init, next_id, pid, players, rem_player, set_direction, tick, _;
+  var FPS, SPEED, add_player, collisions, create_player, defaults, directions, get_state, init, next_id, pid, player, players, rem_player, set_direction, tick, _;
   _ = require("underscore");
+  player = require('./player');
   players = {};
   directions = {};
   FPS = .5;
@@ -51,10 +52,10 @@
     return _results;
   };
   tick = function() {
-    var pid, player, _len;
-    for (player = 0, _len = players.length; player < _len; player++) {
-      pid = players[player];
-      player.tick();
+    var p, pid, _len;
+    for (p = 0, _len = players.length; p < _len; p++) {
+      pid = players[p];
+      player.move(p, direction[pid]);
     }
     return get_state();
   };
@@ -64,8 +65,8 @@
   init = function() {
     return "";
   };
-  set_direction = function(player) {
-    return "";
+  set_direction = function(player, direction) {
+    return directions[player.id] = direction;
   };
   exports.init = init;
   exports.SPEED = SPEED;
