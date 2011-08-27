@@ -31,7 +31,7 @@ add_player = (player) ->
     players[player.id] = player
 
 rem_player = (pid) ->
-    delete players[pid]
+    delete players[player.id]
 
 get_state = () ->
     (x.coords for x in _.values players)
@@ -51,6 +51,10 @@ check_collisions = () ->
             
 md = (c1, c2) ->
     return Math.abs(c1[0], c2[0]) + Math.abs(c1[1], c2[1])
+
+check_self_collisions = () ->
+    #
+    
 
 init = () ->
     ""

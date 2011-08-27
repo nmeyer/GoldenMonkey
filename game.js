@@ -1,5 +1,5 @@
 (function() {
-  var FPS, SPEED, add_player, check_collisions, create_player, defaults, directions, get_state, init, md, move_snakes, next_id, pid, player, players, rem_player, set_direction, tick, _;
+  var FPS, SPEED, add_player, check_collisions, check_self_collisions, create_player, defaults, directions, get_state, init, md, move_snakes, next_id, pid, player, players, rem_player, set_direction, tick, _;
   _ = require("underscore");
   player = require('./player');
   players = {};
@@ -40,7 +40,7 @@
     return players[player.id] = player;
   };
   rem_player = function(pid) {
-    return delete players[pid];
+    return delete players[player.id];
   };
   get_state = function() {
     var x, _i, _len, _ref, _results;
@@ -75,6 +75,7 @@
   md = function(c1, c2) {
     return Math.abs(c1[0], c2[0]) + Math.abs(c1[1], c2[1]);
   };
+  check_self_collisions = function() {};
   init = function() {
     return "";
   };

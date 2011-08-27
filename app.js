@@ -21,14 +21,16 @@
     var player;
     console.log("connected");
     player = game.create_player();
+    console.log('created', player.id);
     game.add_player(player);
+    socket.emit("board", 100);
     socket.emit("gamestate", game.get_state());
     socket.on("update", function(data) {
       console.log(data);
       return game.set_direction(player, data);
     });
     return socket.on("disconnect", function() {
-      return game.rem_player(player.id);
+      return game.rem_player(player);
     });
   });
   loopt = function() {
