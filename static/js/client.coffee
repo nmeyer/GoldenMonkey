@@ -16,9 +16,7 @@ $ ->
 
 
     # Start socket.io
-    #socket = io.connect()
-    #io.sockets.on 'connection', (socket) ->
-    #    console.log 'connected'
+    socket = io.connect()
 
-    #socket.on 'news', (data) ->
-    #    console.log data
+    socket.on "gamestate", (data) ->
+        console.log data

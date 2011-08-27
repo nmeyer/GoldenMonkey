@@ -19,8 +19,9 @@
   game.init();
   io.sockets.on("connection", function(socket) {
     var player;
+    console.log("connected");
     player = game.create_player();
-    game.add_player(player.id);
+    game.add_player(player);
     socket.emit("gamestate", game.get_state());
     socket.on("update", function(data) {
       return console.log(data);
@@ -30,8 +31,10 @@
     });
   });
   loopt = function() {
-    console.log("loopt");
-    return io.sockets.emit("gamestate", game.tick());
+    var state;
+    state = game.tick();
+    console.log("loopt", state);
+    return io.sockets.emit("gamestate", state);
   };
   setInterval(loopt, game.SPEED);
   app.listen(8000);

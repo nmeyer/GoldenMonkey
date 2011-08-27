@@ -3,7 +3,7 @@
   _ = require("underscore");
   players = {};
   directions = {};
-  FPS = 1;
+  FPS = .5;
   SPEED = 1000 / FPS;
   defaults = {
     snakes: {
@@ -41,7 +41,14 @@
     return delete players[pid];
   };
   get_state = function() {
-    return _.values(players);
+    var x, _i, _len, _ref, _results;
+    _ref = _.values(players);
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      x = _ref[_i];
+      _results.push(x.coords);
+    }
+    return _results;
   };
   tick = function() {
     var pid, player, _len;
@@ -63,4 +70,8 @@
   exports.init = init;
   exports.SPEED = SPEED;
   exports.tick = tick;
+  exports.create_player = create_player;
+  exports.add_player = add_player;
+  exports.rem_player = rem_player;
+  exports.get_state = get_state;
 }).call(this);
