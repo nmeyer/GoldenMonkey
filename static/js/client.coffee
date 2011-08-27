@@ -28,7 +28,6 @@ $ ->
         console.log data
 
 
-
 boxAt = (x,y) ->
     return $("[x=#{x}][y=#{y}]")
 
