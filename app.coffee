@@ -39,7 +39,6 @@ io.sockets.on "connection", (socket) ->
 loopt = () ->
     console.log "loopt"
     io.sockets.emit "gamestate", game.tick()
-    ""
 
 setInterval loopt, game.SPEED
 

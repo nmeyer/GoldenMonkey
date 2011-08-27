@@ -31,8 +31,7 @@
   });
   loopt = function() {
     console.log("loopt");
-    io.sockets.emit("gamestate", game.tick());
-    return "";
+    return io.sockets.emit("gamestate", game.tick());
   };
   setInterval(loopt, game.SPEED);
   app.listen(8000);
