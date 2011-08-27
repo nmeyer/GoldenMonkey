@@ -2,31 +2,32 @@
   var boxAt, onGameState, renderSnake, socket, tellServerDirection;
   socket = null;
   $(function() {
-    var box, height, row, width, x, y;
-    width = 20;
-    height = 10;
-    for (y = 1; 1 <= height ? y <= height : y >= height; 1 <= height ? y++ : y--) {
-      row = $("#row-template").clone();
-      for (x = 1; 1 <= width ? x <= width : x >= width; 1 <= width ? x++ : x--) {
-        box = $("#snake-box-template").clone();
-        box.attr('x', x);
-        box.attr('y', y);
-        box.removeAttr('id');
-        box.show();
-        box.appendTo(row);
-      }
-      row.removeAttr('id');
-      row.show();
-      $(".game-board").append(row);
-    }
     socket = io.connect();
+    socket.on("board", function(width, height) {
+      var box, row, x, y, _results;
+      console.log('board');
+      _results = [];
+      for (y = 0; 0 <= height ? y <= height : y >= height; 0 <= height ? y++ : y--) {
+        row = $("#row-template").clone();
+        for (x = 0; 0 <= width ? x <= width : x >= width; 0 <= width ? x++ : x--) {
+          box = $("#snake-box-template").clone();
+          box.attr('x', x);
+          box.attr('y', y);
+          box.removeAttr('id');
+          box.show();
+          box.appendTo(row);
+        }
+        row.removeAttr('id');
+        row.show();
+        _results.push($(".game-board").append(row));
+      }
+      return _results;
+    });
     socket.on("gamestate", function(snakes) {
       console.log(snakes);
       return onGameState(snakes);
     });
     return $(document).keydown(function(event) {
-      console.log('keypress');
-      console.log(event.which);
       if (event.which === 38) {
         return tellServerDirection('up');
       } else if (event.which === 39) {
