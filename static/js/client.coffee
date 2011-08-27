@@ -26,6 +26,8 @@ $ ->
 
     socket.on "gamestate", (data) ->
         console.log data
+        [coords] = data
+        onGameState(coords)
 
 
 boxAt = (x,y) ->

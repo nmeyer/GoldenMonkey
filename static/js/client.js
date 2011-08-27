@@ -26,7 +26,10 @@
     }), 1000);
     socket = io.connect();
     return socket.on("gamestate", function(data) {
-      return console.log(data);
+      var coords;
+      console.log(data);
+      coords = data[0];
+      return onGameState(coords);
     });
   });
   boxAt = function(x, y) {
