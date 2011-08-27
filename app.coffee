@@ -11,7 +11,7 @@ pages = require('./pages')
 
 # Start the express server
 app = express.createServer()
-io.listen app
+io = io.listen app
 
 app.set 'view options',
     layout: false
@@ -34,9 +34,11 @@ io.sockets.on "connection", (socket) ->
         game.rem_player pid
         ""
 
-    socket.on "foo", () ->
-        
-        ""
+loopt = () ->
+    console.log 'loopt'
+    io.sockets.emit "gamestate", game.tick()
+    ""
+setInterval loopt, game.SPEED
 
 # Kick it off
 app.listen 8000

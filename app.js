@@ -1,5 +1,5 @@
 (function() {
-  var app, express, game, http, io, pages, _;
+  var app, express, game, http, io, loopt, pages, _;
   http = require('http');
   _ = require('underscore');
   io = require("socket.io");
@@ -7,7 +7,7 @@
   express = require('express');
   pages = require('./pages');
   app = express.createServer();
-  io.listen(app);
+  io = io.listen(app);
   app.set('view options', {
     layout: false
   });
@@ -22,13 +22,16 @@
     pid = game.create_player();
     game.add_player(pid);
     socket.emit("gamestate", game.get_state());
-    socket.on("disconnect", function() {
+    return socket.on("disconnect", function() {
       game.rem_player(pid);
       return "";
     });
-    return socket.on("foo", function() {
-      return "";
-    });
   });
+  loopt = function() {
+    console.log('loopt');
+    io.sockets.emit("gamestate", game.tick());
+    return "";
+  };
+  setInterval(loopt, game.SPEED);
   app.listen(8000);
 }).call(this);

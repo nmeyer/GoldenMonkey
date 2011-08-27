@@ -1,10 +1,10 @@
 
 _ = require("underscore")
 
-created_players = {}
-active_players = {}
+players = {}
 
-SPEED = 200
+FPS = 1
+SPEED = 1000 / FPS
 
 defaults = 
     snakes:
@@ -25,23 +25,26 @@ create_player = () ->
         id: next_id()
 
 add_player = (player) ->
-    active_players[player.id] = player
+    players[player.id] = player
     
 rem_player = (pid) ->
-    delete active_players[pid]
+    delete players[pid]
 
 get_state = () ->
-    underscore.values activeplayers
+    _.values players
 
-gameloop = () ->
-    tick = () ->
-        
-        ""
-    setInterval tick, SPEED
-    ""
-
+tick = () ->
+    for pid, player in players
+        player.tick()
+    get_state()
+    
 collisions = () ->
     ""
 
 init = () ->
     ""
+
+exports.init = init
+exports.SPEED = SPEED
+exports.tick = tick
+    

@@ -1,9 +1,9 @@
 (function() {
-  var SPEED, active_players, add_player, collisions, create_player, created_players, defaults, gameloop, get_state, init, next_id, pid, rem_player, _;
+  var FPS, SPEED, add_player, collisions, create_player, defaults, get_state, init, next_id, pid, players, rem_player, tick, _;
   _ = require("underscore");
-  created_players = {};
-  active_players = {};
-  SPEED = 200;
+  players = {};
+  FPS = 1;
+  SPEED = 1000 / FPS;
   defaults = {
     snakes: {
       len: 8
@@ -34,21 +34,21 @@
     };
   };
   add_player = function(player) {
-    return active_players[player.id] = player;
+    return players[player.id] = player;
   };
   rem_player = function(pid) {
-    return delete active_players[pid];
+    return delete players[pid];
   };
   get_state = function() {
-    return underscore.values(activeplayers);
+    return _.values(players);
   };
-  gameloop = function() {
-    var tick;
-    tick = function() {
-      return "";
-    };
-    setInterval(tick, SPEED);
-    return "";
+  tick = function() {
+    var pid, player, _len;
+    for (player = 0, _len = players.length; player < _len; player++) {
+      pid = players[player];
+      player.tick();
+    }
+    return get_state();
   };
   collisions = function() {
     return "";
@@ -56,4 +56,7 @@
   init = function() {
     return "";
   };
+  exports.init = init;
+  exports.SPEED = SPEED;
+  exports.tick = tick;
 }).call(this);
