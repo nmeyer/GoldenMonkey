@@ -14,3 +14,11 @@ $ ->
         row.show()
         $(".game-board").append(row)
 
+
+    # Start socket.io
+    #socket = io.connect()
+    #io.sockets.on 'connection', (socket) ->
+    #    console.log 'connected'
+
+    #socket.on 'news', (data) ->
+    #    console.log data
