@@ -19,3 +19,4 @@ move = (player, direction) ->
     # .pop the last member of player.coords & .unshift the new coord onto player.coords
     
     ""
+

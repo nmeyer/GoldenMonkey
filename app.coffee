@@ -25,17 +25,19 @@ app.all '/', pages.home
 game.init()
 
 io.sockets.on "connection", (socket) ->
-    
-    pid = game.create_player()
-    game.add_player pid
+
+    player = game.create_player()
+    game.add_player player.id
     socket.emit "gamestate", game.get_state()
-    
+
+    socket.on "update", (data) ->
+        console.log data
+
     socket.on "disconnect", () ->
-        game.rem_player pid
-        ""
+        game.rem_player player.id
 
 loopt = () ->
-    console.log 'loopt'
+    console.log "loopt"
     io.sockets.emit "gamestate", game.tick()
     ""
 

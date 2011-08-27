@@ -1,7 +1,8 @@
 (function() {
-  var FPS, SPEED, add_player, collisions, create_player, defaults, get_state, init, next_id, pid, players, rem_player, tick, _;
+  var FPS, SPEED, add_player, collisions, create_player, defaults, directions, get_state, init, next_id, pid, players, rem_player, set_direction, tick, _;
   _ = require("underscore");
   players = {};
+  directions = {};
   FPS = 1;
   SPEED = 1000 / FPS;
   defaults = {
@@ -54,6 +55,9 @@
     return "";
   };
   init = function() {
+    return "";
+  };
+  set_direction = function(player) {
     return "";
   };
   exports.init = init;

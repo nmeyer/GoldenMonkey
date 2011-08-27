@@ -2,6 +2,7 @@
 _ = require("underscore")
 
 players = {}
+directions = {}
 
 FPS = 1
 SPEED = 1000 / FPS
@@ -42,6 +43,9 @@ collisions = () ->
     ""
 
 init = () ->
+    ""
+
+set_direction = (player) ->
     ""
 
 exports.init = init

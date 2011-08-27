@@ -18,17 +18,19 @@
   app.all('/', pages.home);
   game.init();
   io.sockets.on("connection", function(socket) {
-    var pid;
-    pid = game.create_player();
-    game.add_player(pid);
+    var player;
+    player = game.create_player();
+    game.add_player(player.id);
     socket.emit("gamestate", game.get_state());
+    socket.on("update", function(data) {
+      return console.log(data);
+    });
     return socket.on("disconnect", function() {
-      game.rem_player(pid);
-      return "";
+      return game.rem_player(player.id);
     });
   });
   loopt = function() {
-    console.log('loopt');
+    console.log("loopt");
     io.sockets.emit("gamestate", game.tick());
     return "";
   };
