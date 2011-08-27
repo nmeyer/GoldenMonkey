@@ -1,5 +1,5 @@
 (function() {
-  var boxAt, onGameState, socket, tellServerDirection;
+  var boxAt, onGameState, renderSnake, socket, tellServerDirection;
   socket = null;
   $(function() {
     var box, height, row, width, x, y;
@@ -20,11 +20,9 @@
       $(".game-board").append(row);
     }
     socket = io.connect();
-    socket.on("gamestate", function(data) {
-      var coords;
-      console.log(data);
-      coords = data[0];
-      return onGameState(coords);
+    socket.on("gamestate", function(snakes) {
+      console.log(snakes);
+      return onGameState(snakes);
     });
     return $(document).keydown(function(event) {
       console.log('keypress');
@@ -46,8 +44,13 @@
   boxAt = function(x, y) {
     return $("[x=" + x + "][y=" + y + "]");
   };
-  onGameState = function(coords) {
+  onGameState = function(snakes) {
     $(".snake-box").removeClass('enemy').removeClass('you');
+    return _.each(snakes, function(snake) {
+      return renderSnake(snake);
+    });
+  };
+  renderSnake = function(coords) {
     return _.each(coords, function(coord) {
       var box, x, y;
       x = coord[0], y = coord[1];
