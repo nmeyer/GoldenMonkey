@@ -21,15 +21,31 @@ $ ->
     # Start socket.io
     socket = io.connect()
 
+    # Init with the size of the board
+    socket.on "board", (width, height) ->
+        console.log 'board'
+        for y in [0..height]
+            row = $("#row-template").clone()
+            for x in [0..width]
+                box = $("#snake-box-template").clone()
+                box.attr('x',x)
+                box.attr('y',y)
+                box.removeAttr('id')
+                box.show()
+                box.appendTo(row)
+
+            row.removeAttr('id')
+            row.show()
+            $(".game-board").append(row)
+
+    # Update the entire grid each iteration
     socket.on "gamestate", (snakes) ->
         console.log snakes
-
         onGameState(snakes)
 
 
+    # Track key presses for direction changes
     $(document).keydown (event) ->
-        console.log 'keypress'
-        console.log event.which
         if event.which == 38
             tellServerDirection('up')
         else if event.which == 39
