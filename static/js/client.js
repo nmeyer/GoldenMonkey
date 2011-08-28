@@ -2,27 +2,14 @@
   var boxAt, onGameState, renderSnake, socket, tellServerDirection;
   socket = null;
   $(function() {
-    var box, height, row, width, x, y;
+    var height, width;
     width = 30;
     height = 30;
-    for (y = 1; 1 <= height ? y <= height : y >= height; 1 <= height ? y++ : y--) {
-      row = $("#row-template").clone();
-      for (x = 1; 1 <= width ? x <= width : x >= width; 1 <= width ? x++ : x--) {
-        box = $("#snake-box-template").clone();
-        box.attr('x', x);
-        box.attr('y', y);
-        box.removeAttr('id');
-        box.show();
-        box.appendTo(row);
-      }
-      row.removeAttr('id');
-      row.show();
-      $(".game-board").append(row);
-    }
     socket = io.connect();
-    socket.on("board", function(width, height) {
-      var x, y, _results;
+    socket.on("board", function(width) {
+      var box, row, x, y, _results;
       console.log('board');
+      height = width;
       _results = [];
       for (y = 0; 0 <= height ? y <= height : y >= height; 0 <= height ? y++ : y--) {
         row = $("#row-template").clone();
@@ -41,8 +28,7 @@
       return _results;
     });
     socket.on("gamestate", function(snakes) {
-      console.log(snakes);
-      return onGameState(snakes);
+      return console.log(snakes);
     });
     return $(document).keydown(function(event) {
       if (event.which === 38) {
@@ -63,7 +49,7 @@
     return $("[x=" + x + "][y=" + y + "]");
   };
   onGameState = function(snakes) {
-    $(".snake-box").removeClass('enemy').removeClass('you');
+    $(".ememy").removeClass('enemy').removeClass('you');
     return _.each(snakes, function(snake) {
       return renderSnake(snake);
     });

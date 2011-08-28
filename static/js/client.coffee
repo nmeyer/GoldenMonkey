@@ -4,26 +4,13 @@ $ ->
     width = 30
     height = 30
 
-    for y in [1..height]
-        row = $("#row-template").clone()
-        for x in [1..width]
-            box = $("#snake-box-template").clone()
-            box.attr('x',x)
-            box.attr('y',y)
-            box.removeAttr('id')
-            box.show()
-            box.appendTo(row)
-
-        row.removeAttr('id')
-        row.show()
-        $(".game-board").append(row)
-
     # Start socket.io
     socket = io.connect()
 
     # Init with the size of the board
-    socket.on "board", (width, height) ->
+    socket.on "board", (width) ->
         console.log 'board'
+        height = width
         for y in [0..height]
             row = $("#row-template").clone()
             for x in [0..width]
@@ -41,7 +28,7 @@ $ ->
     # Update the entire grid each iteration
     socket.on "gamestate", (snakes) ->
         console.log snakes
-        onGameState(snakes)
+        #onGameState(snakes)
 
 
     # Track key presses for direction changes
@@ -63,7 +50,7 @@ boxAt = (x,y) ->
 
 onGameState = (snakes) ->
     # Clear all boxes
-    $(".snake-box").removeClass('enemy').removeClass('you')
+    $(".ememy").removeClass('enemy').removeClass('you')
 
     # Render all the snakes
     _.each snakes, (snake) ->
