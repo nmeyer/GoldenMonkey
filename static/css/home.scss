@@ -43,7 +43,7 @@ body {
     background-color: #434545;
     @include shadow(#333,3px, 5px);
     .content {
-      width: 500px;
+      width: 1000px;
       margin: 0 auto;
       .name {
           padding: 10px 0 10px 0;
@@ -57,7 +57,7 @@ body {
 }
 
 .main-column {
-    width: 500px;
+    width: 1000px;
     margin: 40px auto 0 auto;
 }
 .game-board {
@@ -65,8 +65,8 @@ body {
 .row {
 }
 .snake-box {
-    width:10px;
-    height:10px;
+    width:8px;
+    height:8px;
     margin: 0 1px 1px 0;
     background-color: #eee;
     float: left;

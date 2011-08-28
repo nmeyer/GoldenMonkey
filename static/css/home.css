@@ -14,7 +14,7 @@ body {
   -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=90, Color='$color')";
   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=90, Color='$color'); }
   .header-bar .content {
-    width: 500px;
+    width: 1000px;
     margin: 0 auto; }
     .header-bar .content .name {
       padding: 10px 0 10px 0;
@@ -25,12 +25,12 @@ body {
       font-weight: bold; }
 
 .main-column {
-  width: 500px;
+  width: 1000px;
   margin: 40px auto 0 auto; }
 
 .snake-box {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   margin: 0 1px 1px 0;
   background-color: #eee;
   float: left; }
