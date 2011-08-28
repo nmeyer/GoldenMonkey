@@ -1,19 +1,10 @@
 (function() {
-  var FPS, SPEED, add_player, check_collisions, check_self_collisions, create_player, defaults, directions, get_state, init, md, move_snakes, next_id, pid, player, players, rem_player, set_direction, tick, _;
+  var add_player, check_collisions, check_self_collisions, create_player, defaults, directions, get_state, init, md, move_snakes, next_id, pid, player, players, rem_player, set_direction, tick, _;
   _ = require("underscore");
   player = require('./player');
+  defaults = require('./config');
   players = {};
   directions = {};
-  FPS = 20;
-  SPEED = 1000 / FPS;
-  defaults = {
-    snakes: {
-      len: 8
-    },
-    board: {
-      size: 10
-    }
-  };
   pid = 0;
   next_id = function() {
     return pid++;
@@ -86,7 +77,7 @@
   exports.add_player = add_player;
   exports.rem_player = rem_player;
   exports.get_state = get_state;
-  exports.SPEED = SPEED;
+  exports.SPEED = defaults.SPEED;
   exports.init = init;
   exports.tick = tick;
 }).call(this);

@@ -1,4 +1,4 @@
-
+defaults = require("./config")
 assert = require("assert").ok
 
 vectors =
@@ -37,10 +37,15 @@ directions =
     player.coords.unshift(head)
     player.coords.pop()
     
+    # check for wall collisions
+    if head[0] < 0 or head[0] > (defaults.board.size-1) or head[1] < 0 or head[1] > (defaults.board.size-1)
+        console.log "wall hit!"
+        kill(player)
+    
     # check new head against all other @coords
     for coord in player.coords[1..player.coords.length]
         if head[0] == coord[0] and head[1] == coord[1]
-            console.log "killed!"
+            console.log "ran into self!"
             kill(player)
     
     # check head against all other players coords for collision

@@ -1,26 +1,17 @@
-
 _ = require("underscore")
 player = require('./player')
+defaults = require('./config')
 
 players = {}
 directions = {}
-
-FPS = 20
-SPEED = 1000 / FPS
-
-defaults = 
-    snakes:
-        len: 8
-    board:
-        size: 10
 
 pid = 0
 next_id = () ->
     return pid++
 
 create_player = () ->
-    x = Math.floor Math.random() * defaults.board.size
-    y = Math.floor Math.random() * defaults.board.size
+    x = Math.floor (Math.random() * defaults.board.size)
+    y = Math.floor (Math.random() * defaults.board.size)
     p = 
         alive: true
         coords: ([x, ny] for ny in [0..defaults.snakes.len])
@@ -66,6 +57,6 @@ exports.create_player = create_player
 exports.add_player = add_player
 exports.rem_player = rem_player
 exports.get_state = get_state
-exports.SPEED = SPEED
+exports.SPEED = defaults.SPEED
 exports.init = init
 exports.tick = tick
